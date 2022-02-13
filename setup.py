@@ -6,13 +6,25 @@ from os import system
 
 from distutils.core import setup, Extension
 
-version = "1.3.4"
+
+DESC = """Python bindings for ILM's OpenEXR image file format.
+
+To install this packge, make sure your system already has the OpenEXR library
+installed before.
+
+If you detect any problem, please feel free to report the issue on the GitHub
+page:
+
+https://github.com/sanguinariojoe/pip-openexr/issues
+"""
+
+version = "1.3.5"
 setup(name='OpenEXR',
   author = 'James Bowman',
   author_email = 'jamesb@excamera.com',
-  url = 'http://www.excamera.com/sphinx/articles-openexr.html',
+  url = 'https://github.com/sanguinariojoe/pip-openexr',
   description = "Python bindings for ILM's OpenEXR image file format",
-  long_description = "Python bindings for ILM's OpenEXR image file format",
+  long_description = DESC,
   version=version,
   ext_modules=[ 
     Extension('OpenEXR',
