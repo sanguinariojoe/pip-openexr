@@ -33,8 +33,6 @@ typedef int Py_ssize_t;
   #define PyUTF8_AsSstring(x)   PyString_AsString(x)
 #endif
 
-#include <ImathConfig.h>
-#include <ImathBox.h>
 #include <ImfIO.h>
 #include <Iex.h>
 #include <ImfArray.h>

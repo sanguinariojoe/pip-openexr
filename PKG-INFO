@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: OpenEXR
-Version: 1.3.5
+Version: 1.3.6
 Summary: Python bindings for ILM's OpenEXR image file format
 Home-page: https://github.com/sanguinariojoe/pip-openexr
 Author: James Bowman

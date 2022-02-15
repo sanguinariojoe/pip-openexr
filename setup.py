@@ -18,7 +18,7 @@ page:
 https://github.com/sanguinariojoe/pip-openexr/issues
 """
 
-version = "1.3.5"
+version = "1.3.6"
 setup(name='OpenEXR',
   author = 'James Bowman',
   author_email = 'jamesb@excamera.com',
@@ -29,10 +29,14 @@ setup(name='OpenEXR',
   ext_modules=[ 
     Extension('OpenEXR',
               ['OpenEXR.cpp'],
-              include_dirs=['/usr/include/OpenEXR', '/usr/local/include/OpenEXR', '/opt/local/include/OpenEXR',
-                            '/usr/include/Imath', '/usr/local/include/Imath', '/opt/local/include/Imath'],
+              include_dirs=['/usr/include/OpenEXR',
+                            '/usr/local/include/OpenEXR',
+                            '/opt/local/include/OpenEXR',
+                            '/usr/include/Imath',
+                            '/usr/local/include/Imath',
+                            '/opt/local/include/Imath'],
               library_dirs=['/usr/local/lib', '/opt/local/lib'],
-              libraries=['Iex', 'Imath', 'OpenEXR', 'z'],
+              libraries=['Iex', 'OpenEXR', 'z'],
               extra_compile_args=['-g', '-DVERSION="%s"' % version])
   ],
   py_modules=['Imath'],
