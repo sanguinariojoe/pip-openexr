@@ -8,6 +8,7 @@ import platform
 from distutils.core import setup, Extension
 
 
+VERSION = "1.3.8"
 DESC = """Python bindings for ILM's OpenEXR image file format.
 
 To install this packge, make sure your system already has the OpenEXR library
@@ -19,6 +20,7 @@ page:
 https://github.com/sanguinariojoe/pip-openexr/issues
 """
 
+
 print("Looking for libOpenEXR...")
 if platform.system() == "Linux" and system("ldconfig -p | grep libOpenEXR"):
     # There is no libOpenEXR, probably an old version of OpenEXR
@@ -26,20 +28,19 @@ if platform.system() == "Linux" and system("ldconfig -p | grep libOpenEXR"):
 else:
     libraries=['Iex', 'OpenEXR', 'z']
 
-extra_compile_args = ['-g', '-DVERSION="%s"' % version]
+extra_compile_args = ['-g', '-DVERSION="%s"' % VERSION]
 if platform.system() == 'Darwin':
     extra_compile_args += ['-std=c++11',
                            '-Wc++11-extensions',
                            '-Wc++11-long-long']
 
-version = "1.3.8"
 setup(name='OpenEXR',
   author = 'James Bowman',
   author_email = 'jamesb@excamera.com',
   url = 'https://github.com/sanguinariojoe/pip-openexr',
   description = "Python bindings for ILM's OpenEXR image file format",
   long_description = DESC,
-  version=version,
+  version=VERSION,
   ext_modules=[ 
     Extension('OpenEXR',
               ['OpenEXR.cpp'],
