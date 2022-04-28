@@ -26,7 +26,13 @@ if platform.system() == "Linux" and system("ldconfig -p | grep libOpenEXR"):
 else:
     libraries=['Iex', 'OpenEXR', 'z']
 
-version = "1.3.7"
+extra_compile_args = ['-g', '-DVERSION="%s"' % version]
+if platform.system() == 'Darwin':
+    extra_compile_args += ['-std=c++11',
+                           '-Wc++11-extensions',
+                           '-Wc++11-long-long']
+
+version = "1.3.8"
 setup(name='OpenEXR',
   author = 'James Bowman',
   author_email = 'jamesb@excamera.com',
@@ -47,7 +53,7 @@ setup(name='OpenEXR',
                             '/usr/local/lib',
                             '/opt/local/lib'],
               libraries=libraries,
-              extra_compile_args=['-g', '-DVERSION="%s"' % version])
+              extra_compile_args=extra_compile_args)
   ],
   py_modules=['Imath'],
 )
