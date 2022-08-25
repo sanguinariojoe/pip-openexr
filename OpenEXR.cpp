@@ -6,6 +6,13 @@ typedef int Py_ssize_t;
 #define PY_SSIZE_T_MIN INT_MIN
 #endif
 
+#ifdef _MSC_VER
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#else
+#include <unistd.h>
+#endif
+
 #if PY_MAJOR_VERSION >= 3
   #define MOD_ERROR_VAL NULL
   #define MOD_SUCCESS_VAL(val) val
