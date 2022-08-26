@@ -69,6 +69,7 @@ typedef int Py_ssize_t;
 #include <ImfTimeCodeAttribute.h>
 #include <ImfTimeCode.h>
 
+#include <string>
 #include <fstream>
 #include <iostream>
 #include <iomanip>
@@ -103,6 +104,23 @@ static PyObject *PyObject_Call1(PyObject *f, PyObject* a)
     PyObject *r = PyObject_CallObject(f, a);
     Py_DECREF(a);
     return r;
+}
+
+/** @brief split a string in a list of them
+ * @param str The string to split
+ * @param sep The separator
+ * @return The list of strings
+ */
+static std::vector<std::string> split(const std::string& str, const char sep)
+{
+    std::stringstream spliter(str);
+    std::string token;
+    std::vector<std::string> words;
+    while (std::getline(spliter, token, sep)) {
+        if (token.size())
+            words.push_back(token);
+    }
+    return words;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -1164,12 +1182,13 @@ int makeOutputFile(PyObject *self, PyObject *args, PyObject *kwds)
 PyObject *makeHeader(PyObject *self, PyObject *args)
 {
     int w, h;
-    if (!PyArg_ParseTuple(args, "ii:Header", &w, &h))
+    const char *channels = "R,G,B";
+    if (!PyArg_ParseTuple(args, "ii|s:Header", &w, &h, &channels))
       return NULL;
     Header header(w, h);
-    header.channels().insert("R", Channel(FLOAT));
-    header.channels().insert("G", Channel(FLOAT));
-    header.channels().insert("B", Channel(FLOAT));
+    for (auto channel : split(channels, ',')) {
+        header.channels().insert(channel.c_str(), Channel(FLOAT));
+    }
     return dict_from_header(header);
 }
 

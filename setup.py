@@ -8,7 +8,7 @@ import platform
 from distutils.core import setup, Extension
 
 
-VERSION = "1.3.8"
+VERSION = "1.3.9"
 DESC = """Python bindings for ILM's OpenEXR image file format.
 
 To install this packge, make sure your system already has the OpenEXR library
