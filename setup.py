@@ -24,7 +24,7 @@ https://github.com/sanguinariojoe/pip-openexr/issues
 print("Looking for libOpenEXR...")
 if platform.system() == "Linux" and system("ldconfig -p | grep libOpenEXR"):
     # There is no libOpenEXR, probably an old version of OpenEXR
-    libraries=['Iex', 'Half', 'Imath', 'IlmImf', 'z']
+    libraries=['Iex', 'Imath', 'z']
 else:
     libraries=['Iex', 'OpenEXR', 'z']
 
