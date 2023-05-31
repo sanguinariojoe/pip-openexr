@@ -57,6 +57,7 @@ jobs:
       CIBW_SKIP: "*-win32 *_i686"
       CIBW_BEFORE_ALL_LINUX: >
         echo "Installing OpenEXR-3.1.7..." &&
+        ls openexr/
         cd openexr.build &&
         cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../openexr &&
         cmake --build ./ --config Release &&
