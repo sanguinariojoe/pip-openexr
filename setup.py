@@ -1,6 +1,4 @@
-from distutils.core import setup
-from distutils.extension import Extension
-from distutils.command.build_py import build_py as _build_py
+from setuptools import setup, Extension
 
 from os import system
 import platform
