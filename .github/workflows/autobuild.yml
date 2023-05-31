@@ -55,10 +55,15 @@ jobs:
     env:
       # Skip 32-bit wheels builds
       CIBW_SKIP: "*-win32 *_i686"
-      CIBW_BEFORE_ALL_LINUX: >
+      CIBW_BEFORE_ALL: >
+        echo "Installing Imath..." &&
+        cd imath.build &&
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install ../imath &&
+        cmake --build ./ --config Release &&
+        cmake --install ./ --config Release
         echo "Installing OpenEXR-3.1.7..." &&
         cd openexr.build &&
-        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../openexr &&
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install ../openexr &&
         cmake --build ./ --config Release &&
         cmake --install ./ --config Release
 
@@ -71,21 +76,35 @@ jobs:
       - name: Install cibuildwheel
         run: python -m pip install cibuildwheel==2.8.1
 
+      - name: Create folders
+        run: |
+            mkdir -p ${{github.workspace}}/imath.build
+            mkdir -p ${{github.workspace}}/openexr.build
+            mkdir -p ${{github.workspace}}/openexr.install
+
+      - name: download Imath source code
+        uses: suisei-cn/actions-download-file@v1.0.1
+        with:
+          url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.7.tar.gz
+          target: ${{github.workspace}}/
+
+      - name: Extract Imath
+        run: |
+            tar -xvzf v3.1.8.tar.gz -C ${{github.workspace}}/
+            mv Imath-3.1.8 imath
+            rm v3.1.8.tar.gz
+
       - name: download OpenEXR source code
         uses: suisei-cn/actions-download-file@v1.0.1
         with:
           url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.7.tar.gz
           target: ${{github.workspace}}/
 
-      - name: Create folders
-        run: |
-            mkdir -p ${{github.workspace}}/openexr.build
-            mkdir -p ${{github.workspace}}/openexr.install
-
       - name: Extract OpenEXR
         run: |
             tar -xvzf v3.1.7.tar.gz -C ${{github.workspace}}/
             mv openexr-3.1.7 openexr
+            rm v3.1.7.tar.gz
 
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse
