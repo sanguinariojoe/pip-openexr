@@ -49,10 +49,15 @@ setup(name='OpenEXR',
                             '/opt/local/include/OpenEXR',
                             '/usr/include/Imath',
                             '/usr/local/include/Imath',
-                            '/opt/local/include/Imath'],
+                            '/opt/local/include/Imath',
+                            # For the GitHub actions wheels autobuild
+                            './openexr.install/include/OpenEXR',
+                            './openexr.install/include/Imath',],
               library_dirs=['/usr/lib',
                             '/usr/local/lib',
-                            '/opt/local/lib'],
+                            '/opt/local/lib',
+                            # For the GitHub actions wheels autobuild
+                            './openexr.install/lib',],
               libraries=libraries,
               extra_compile_args=extra_compile_args)
   ],
