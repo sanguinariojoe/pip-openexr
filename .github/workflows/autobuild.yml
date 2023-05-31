@@ -57,9 +57,9 @@ jobs:
       CIBW_SKIP: "*-win32 *_i686"
       CIBW_BEFORE_ALL_LINUX: >
         echo "Installing OpenEXR-3.1.7..." &&
-        cd openexr.build
+        cd openexr.build &&
         cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../openexr &&
-        cmake --build ./ --config Release
+        cmake --build ./ --config Release &&
         cmake --install ./ --config Release
 
     steps:
@@ -83,7 +83,7 @@ jobs:
             mkdir -p ${{github.workspace}}/openexr.build
             mkdir -p ${{github.workspace}}/openexr.install
 
-      - name: Extract VTK tgz
+      - name: Extract OpenEXR
         run: |
             tar -xvzf v3.1.7.tar.gz -C ${{github.workspace}}/openexr/
 
