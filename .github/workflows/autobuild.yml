@@ -58,19 +58,19 @@ jobs:
       CIBW_BEFORE_BUILD: >
         echo "Installing Zlib..." &&
         cd zlib.build &&
-        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install ../zlib &&
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DCMAKE_INSTALL_LIBDIR=lib ../zlib &&
         cmake --build ./ --config Release --clean-first &&
         cmake --install ./ --config Release &&
         cd .. &&
         echo "Installing Imath..." &&
         cd imath.build &&
-        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DBUILD_TESTING=OFF -DBUILD_SHARED_LIBS=OFF ../imath &&
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DCMAKE_INSTALL_LIBDIR=lib -DBUILD_TESTING=OFF -DBUILD_SHARED_LIBS=OFF ../imath &&
         cmake --build ./ --config Release --clean-first &&
         cmake --install ./ --config Release &&
         cd .. &&
         echo "Installing OpenEXR-3.1.7..." &&
         cd openexr.build &&
-        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DBUILD_TESTING=OFF -DBUILD_SHARED_LIBS=OFF ../openexr &&
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DCMAKE_INSTALL_LIBDIR=lib -DBUILD_TESTING=OFF -DBUILD_SHARED_LIBS=OFF ../openexr &&
         cmake --build ./ --config Release --clean-first &&
         cmake --install ./ --config Release &&
         cd ..
