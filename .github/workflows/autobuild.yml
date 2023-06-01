@@ -56,6 +56,12 @@ jobs:
       # Skip 32-bit wheels builds
       CIBW_SKIP: "*-win32 *_i686"
       CIBW_BEFORE_BUILD: >
+        echo "Installing Zlib..." &&
+        cd zlib.build &&
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install ../zlib &&
+        cmake --build ./ --config Release --clean-first &&
+        cmake --install ./ --config Release &&
+        cd .. &&
         echo "Installing Imath..." &&
         cd imath.build &&
         cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DBUILD_TESTING=OFF -DBUILD_SHARED_LIBS=OFF ../imath &&
@@ -85,9 +91,22 @@ jobs:
 
       - name: Create folders
         run: |
+            mkdir -p ${{github.workspace}}/zlib.build
             mkdir -p ${{github.workspace}}/imath.build
             mkdir -p ${{github.workspace}}/openexr.build
             mkdir -p ${{github.workspace}}/openexr.install
+
+      - name: download Zlib source code
+        uses: suisei-cn/actions-download-file@v1.0.1
+        with:
+          url: https://github.com/madler/zlib/releases/download/v1.2.13/zlib-1.2.13.tar.gz
+          target: ${{github.workspace}}/
+
+      - name: Extract Zlib
+        run: |
+            tar -xvzf zlib-1.2.13.tar.gz -C ${{github.workspace}}/
+            mv zlib-1.2.13 zlib
+            rm zlib-1.2.13.tar.gz
 
       - name: download Imath source code
         uses: suisei-cn/actions-download-file@v1.0.1
