@@ -19,11 +19,10 @@ https://github.com/sanguinariojoe/pip-openexr/issues
 """
 
 
-libraries=['z']
-libraries_static=['Iex-3_1', 'OpenEXR-3_1']
+libraries=[]
+libraries_static=['z', 'Iex-3_1', 'OpenEXR-3_1']
 definitions = [('PYOPENEXR_VERSION', f'"{VERSION}"')]
 if platform.system() == "Windows":
-    libraries=[]
     definitions = [('PYOPENEXR_VERSION', f'\\"{VERSION}\\"')]
 extra_compile_args = []
 if platform.system() == 'Darwin':
