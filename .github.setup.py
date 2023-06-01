@@ -53,6 +53,8 @@ setup(name='OpenEXR',
   ext_modules=[ 
     Extension('OpenEXR',
               ['OpenEXR.cpp'],
+              include_dirs=['./openexr.install/include/OpenEXR',
+                            './openexr.install/include/Imath',],
               libraries=libraries,
               extra_compile_args=extra_compile_args,
               extra_link_args=extra_link_args,
