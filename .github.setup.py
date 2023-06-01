@@ -28,9 +28,9 @@ if platform.system() == 'Darwin':
                            '-Wc++11-extensions',
                            '-Wc++11-long-long']
 
-libraries_dir = "./openexr.install/lib"
+libraries_dir = "./openexr.install/lib/"
 if not os.path.isdir(libraries_dir):
-    libraries_dir = "./openexr.install/lib64"
+    libraries_dir = "./openexr.install/lib64/"
 if platform.system() == "Windows":
     extra_link_args = [libraries_dir + lib + ".lib"
                        for lib in libraries_static]
