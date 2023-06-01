@@ -22,7 +22,8 @@ https://github.com/sanguinariojoe/pip-openexr/issues
 libraries=['z']
 libraries_static=['Iex-3_1', 'OpenEXR-3_1']
 
-extra_compile_args = ['-DVERSION="%s"' % VERSION]
+definitions = [('VERSION', f'"{VERSION}"')]
+extra_compile_args = []
 if platform.system() == 'Darwin':
     extra_compile_args += ['-std=c++11',
                            '-Wc++11-extensions',
@@ -44,21 +45,23 @@ else:
 
 
 setup(name='OpenEXR',
-  author = 'James Bowman',
-  author_email = 'jamesb@excamera.com',
-  url = 'https://github.com/sanguinariojoe/pip-openexr',
-  description = "Python bindings for ILM's OpenEXR image file format",
-  long_description = DESC,
-  version=VERSION,
-  ext_modules=[ 
-    Extension('OpenEXR',
-              ['OpenEXR.cpp'],
-              include_dirs=['./openexr.install/include/OpenEXR',
-                            './openexr.install/include/Imath',],
-              libraries=libraries,
-              extra_compile_args=extra_compile_args,
-              extra_link_args=extra_link_args,
-              )
-  ],
-  py_modules=['Imath'],
+    author = 'James Bowman',
+    author_email = 'jamesb@excamera.com',
+    url = 'https://github.com/sanguinariojoe/pip-openexr',
+    description = "Python bindings for ILM's OpenEXR image file format",
+    long_description = DESC,
+    version=VERSION,
+    ext_modules=[ 
+        Extension('OpenEXR',
+                  ['OpenEXR.cpp'],
+                  language='c++',
+                  define_macros=definitions,
+                  include_dirs=['./openexr.install/include/OpenEXR',
+                                './openexr.install/include/Imath',],
+                  libraries=libraries,
+                  extra_compile_args=extra_compile_args,
+                  extra_link_args=extra_link_args,
+                  )
+    ],
+    py_modules=['Imath'],
 )
