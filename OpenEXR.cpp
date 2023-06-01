@@ -1267,7 +1267,7 @@ MOD_INIT(OpenEXR)
     PyDict_SetItemString(d, "UINT", item= PyLong_FromLong(UINT)); Py_DECREF(item);
     PyDict_SetItemString(d, "HALF", item= PyLong_FromLong(HALF)); Py_DECREF(item);
     PyDict_SetItemString(d, "FLOAT", item= PyLong_FromLong(FLOAT)); Py_DECREF(item);
-    PyDict_SetItemString(d, "__version__", item= PyString_FromString(VERSION)); Py_DECREF(item);
+    PyDict_SetItemString(d, "__version__", item= PyString_FromString(PYOPENEXR_VERSION)); Py_DECREF(item);
 
     return MOD_SUCCESS_VAL(m);
 }

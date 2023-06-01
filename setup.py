@@ -26,33 +26,36 @@ if platform.system() == "Linux" and system("ldconfig -p | grep libOpenEXR"):
 else:
     libraries=['Iex', 'OpenEXR', 'z']
 
-extra_compile_args = ['-g', '-DVERSION="%s"' % VERSION]
+definitions = [('PYOPENEXR_VERSION', f'"{VERSION}"')]
+extra_compile_args = []
 if platform.system() == 'Darwin':
     extra_compile_args += ['-std=c++11',
                            '-Wc++11-extensions',
                            '-Wc++11-long-long']
 
 setup(name='OpenEXR',
-  author = 'James Bowman',
-  author_email = 'jamesb@excamera.com',
-  url = 'https://github.com/sanguinariojoe/pip-openexr',
-  description = "Python bindings for ILM's OpenEXR image file format",
-  long_description = DESC,
-  version=VERSION,
-  ext_modules=[ 
-    Extension('OpenEXR',
-              ['OpenEXR.cpp'],
-              include_dirs=['/usr/include/OpenEXR',
-                            '/usr/local/include/OpenEXR',
-                            '/opt/local/include/OpenEXR',
-                            '/usr/include/Imath',
-                            '/usr/local/include/Imath',
-                            '/opt/local/include/Imath',],
-              library_dirs=['/usr/lib',
-                            '/usr/local/lib',
-                            '/opt/local/lib',],
-              libraries=libraries,
-              extra_compile_args=extra_compile_args)
+    author = 'James Bowman',
+    author_email = 'jamesb@excamera.com',
+    url = 'https://github.com/sanguinariojoe/pip-openexr',
+    description = "Python bindings for ILM's OpenEXR image file format",
+    long_description = DESC,
+    version=VERSION,
+    ext_modules=[ 
+        Extension('OpenEXR',
+                  ['OpenEXR.cpp'],
+                  language='c++',
+                  define_macros=definitions,
+                  include_dirs=['/usr/include/OpenEXR',
+                                '/usr/local/include/OpenEXR',
+                                '/opt/local/include/OpenEXR',
+                                '/usr/include/Imath',
+                                '/usr/local/include/Imath',
+                                '/opt/local/include/Imath',],
+                  library_dirs=['/usr/lib',
+                                '/usr/local/lib',
+                                '/opt/local/lib',],
+                  libraries=libraries,
+                  extra_compile_args=extra_compile_args)
   ],
   py_modules=['Imath'],
 )
