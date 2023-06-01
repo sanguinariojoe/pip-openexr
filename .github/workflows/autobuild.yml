@@ -58,16 +58,39 @@ jobs:
       CIBW_BEFORE_BUILD: >
         echo "Installing Imath..." &&
         cd imath.build &&
-        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DBUILD_TESTING=OFF ../imath &&
+        cmake -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_INSTALL_PREFIX=../openexr.install
+            -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
+            -DCMAKE_PREFIX_PATH=../openexr.install
+            -DBUILD_TESTING=OFF
+            -DBUILD_SHARED_LIBS=OFF
+            ../imath &&
         cmake --build ./ --config Release --clean-first &&
         cmake --install ./ --config Release &&
         cd .. &&
         echo "Installing OpenEXR-3.1.7..." &&
         cd openexr.build &&
-        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DBUILD_TESTING=OFF ../openexr &&
+        cmake -DCMAKE_BUILD_TYPE=Release
+            -DCMAKE_INSTALL_PREFIX=../openexr.install
+            -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
+            -DCMAKE_PREFIX_PATH=../openexr.install
+            -DBUILD_TESTING=OFF
+            -DBUILD_SHARED_LIBS=OFF
+            ../openexr &&
         cmake --build ./ --config Release --clean-first &&
         cmake --install ./ --config Release &&
         cd ..
+      CIBW_REPAIR_WHEEL_COMMAND_LINUX: >
+        auditwheel repair
+            --exclude libIex-3_1.so.30.7.1
+            --exclude libIex-3_1.so.30
+            --exclude libIex-3_1.so
+            --exclude libIex.so 
+            --exclude libOpenEXR-3_1.so.30.7.1
+            --exclude libOpenEXR-3_1.so.30
+            --exclude libOpenEXR-3_1.so
+            --exclude libOpenEXR.so
+            -w {dest_dir} {wheel}
 
     steps:
       - uses: actions/checkout@v3
