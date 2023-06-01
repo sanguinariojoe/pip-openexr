@@ -6,7 +6,10 @@ import platform
 from distutils.core import setup, Extension
 
 
-VERSION = "1.3.9"
+VERSION_MAJOR = 1
+VERSION_MINOR = 3
+VERSION_PATCH = 9
+VERSION = f"{VERSION_MAJOR}.{VERSION_MINOR}.{VERSION_PATCH}"
 DESC = """Python bindings for ILM's OpenEXR image file format.
 
 This is a script to autobuild the wheels using github actions. Please, do not
@@ -21,7 +24,9 @@ https://github.com/sanguinariojoe/pip-openexr/issues
 
 libraries=[]
 libraries_static=['z', 'Iex-3_1', 'OpenEXR-3_1']
-definitions = [('PYOPENEXR_VERSION', f'"{VERSION}"')]
+definitions = [('PYOPENEXR_VERSION_MAJOR', f'{VERSION_MAJOR}'),
+               ('PYOPENEXR_VERSION_MINOR', f'{VERSION_MINOR}'),
+               ('PYOPENEXR_VERSION_PATCH', f'{VERSION_PATCH}'),]
 if platform.system() == "Windows":
     libraries_static=['zlibstatic', 'Imath-3_1', 'Iex-3_1', 'OpenEXR-3_1', 'IlmThread-3_1']
     definitions = [('PYOPENEXR_VERSION', f'\\"{VERSION}\\"')]

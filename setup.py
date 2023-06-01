@@ -6,7 +6,10 @@ import platform
 from distutils.core import setup, Extension
 
 
-VERSION = "1.3.9"
+VERSION_MAJOR = 1
+VERSION_MINOR = 3
+VERSION_PATCH = 9
+VERSION = f"{VERSION_MAJOR}.{VERSION_MINOR}.{VERSION_PATCH}"
 DESC = """Python bindings for ILM's OpenEXR image file format.
 
 To install this packge, make sure your system already has the OpenEXR library
@@ -26,7 +29,9 @@ if platform.system() == "Linux" and system("ldconfig -p | grep libOpenEXR"):
 else:
     libraries=['Iex', 'OpenEXR', 'z']
 
-definitions = [('PYOPENEXR_VERSION', f'"{VERSION}"')]
+definitions = [('PYOPENEXR_VERSION_MAJOR', f'{VERSION_MAJOR}'),
+               ('PYOPENEXR_VERSION_MINOR', f'{VERSION_MINOR}'),
+               ('PYOPENEXR_VERSION_PATCH', f'{VERSION_PATCH}'),]
 extra_compile_args = []
 if platform.system() == 'Darwin':
     extra_compile_args += ['-std=c++11',
