@@ -817,7 +817,7 @@ static PyObject *outwrite(PyObject *self, PyObject *args)
     if (!PyArg_ParseTuple(args, "O!|i:writePixels", &PyDict_Type, &pixeldata, &height))
        return NULL;
 
-    ssize_t currentScanLine = file->currentScanLine();
+    int currentScanLine = file->currentScanLine();
     if (file->header().lineOrder() == DECREASING_Y) {
         // With DECREASING_Y, currentScanLine() returns the maximum Y value of
         // the window on the first call, and decrements at each scan line.
@@ -853,7 +853,7 @@ static PyObject *outwrite(PyObject *self, PyObject *args)
             int ySampling = i.channel().ySampling;
             int yStride = typeSize * width;
             char *srcPixels;
-            ssize_t expectedSize = (height * yStride) / (xSampling * ySampling);
+            int expectedSize = (height * yStride) / (xSampling * ySampling);
             Py_ssize_t bufferSize;
 
             if (PyString_Check(channel_spec)) {
