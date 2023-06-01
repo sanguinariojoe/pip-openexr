@@ -22,7 +22,8 @@ https://github.com/sanguinariojoe/pip-openexr/issues
 print("Looking for libOpenEXR...")
 if platform.system() == "Linux" and \
   system("ldconfig -p | grep libOpenEXR") and \
-  system("ls ./openexr.install/lib | grep libOpenEXR"):
+  system("ls ./openexr.install/lib | grep libOpenEXR") and \
+  system("ls ./openexr.install/lib64 | grep libOpenEXR"):
     # There is no libOpenEXR, probably an old version of OpenEXR
     libraries=['Iex', 'Half', 'Imath', 'IlmImf', 'z']
 else:
@@ -57,7 +58,8 @@ setup(name='OpenEXR',
                             '/usr/local/lib',
                             '/opt/local/lib',
                             # For the GitHub actions wheels autobuild
-                            './openexr.install/lib',],
+                            './openexr.install/lib',
+                            './openexr.install/lib64',],
               libraries=libraries,
               extra_compile_args=extra_compile_args)
   ],
