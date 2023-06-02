@@ -1,5 +1,5 @@
 import platform
-from distutils.core import Extension, setup
+from setuptools import setup, Extension
 from os import system
 
 VERSION_MAJOR = 1
