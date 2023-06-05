@@ -97,7 +97,7 @@ jobs:
             mkdir -p ${{github.workspace}}/openexr.install
 
       - name: download Zlib source code
-        uses: suisei-cn/actions-download-file@v1.0.1
+        uses: suisei-cn/actions-download-file@v1.4.0
         with:
           url: https://github.com/madler/zlib/releases/download/v1.2.13/zlib-1.2.13.tar.gz
           target: ${{github.workspace}}/
@@ -109,7 +109,7 @@ jobs:
             rm zlib-1.2.13.tar.gz
 
       - name: download Imath source code
-        uses: suisei-cn/actions-download-file@v1.0.1
+        uses: suisei-cn/actions-download-file@v1.4.0
         with:
           url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.7.tar.gz
           target: ${{github.workspace}}/
@@ -121,7 +121,7 @@ jobs:
             rm v3.1.7.tar.gz
 
       - name: download OpenEXR source code
-        uses: suisei-cn/actions-download-file@v1.0.1
+        uses: suisei-cn/actions-download-file@v1.4.0
         with:
           url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.7.tar.gz
           target: ${{github.workspace}}/
