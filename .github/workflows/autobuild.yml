@@ -62,13 +62,13 @@ jobs:
         cmake --build ./ --config Release --clean-first &&
         cmake --install ./ --config Release &&
         cd .. &&
-        echo "Installing Imath..." &&
+        echo "Installing Imath-3.1.8..." &&
         cd imath.build &&
         cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DCMAKE_INSTALL_LIBDIR=lib -DBUILD_TESTING=OFF -DBUILD_SHARED_LIBS=OFF ../imath &&
         cmake --build ./ --config Release --clean-first &&
         cmake --install ./ --config Release &&
         cd .. &&
-        echo "Installing OpenEXR-3.1.7..." &&
+        echo "Installing OpenEXR-3.1.8..." &&
         cd openexr.build &&
         cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../openexr.install -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_PREFIX_PATH=../openexr.install -DCMAKE_INSTALL_LIBDIR=lib -DBUILD_TESTING=OFF -DBUILD_SHARED_LIBS=OFF ../openexr &&
         cmake --build ./ --config Release --clean-first &&
@@ -113,26 +113,26 @@ jobs:
       - name: download Imath source code
         uses: suisei-cn/actions-download-file@v1.4.0
         with:
-          url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.7.tar.gz
+          url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.8.tar.gz
           target: ${{github.workspace}}/
 
       - name: Extract Imath
         run: |
-            tar -xvzf v3.1.7.tar.gz -C ${{github.workspace}}/
-            mv Imath-3.1.7 imath
-            rm v3.1.7.tar.gz
+            tar -xvzf v3.1.8.tar.gz -C ${{github.workspace}}/
+            mv Imath-3.1.8 imath
+            rm v3.1.8.tar.gz
 
       - name: download OpenEXR source code
         uses: suisei-cn/actions-download-file@v1.4.0
         with:
-          url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.7.tar.gz
+          url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.8.tar.gz
           target: ${{github.workspace}}/
 
       - name: Extract OpenEXR
         run: |
-            tar -xvzf v3.1.7.tar.gz -C ${{github.workspace}}/
-            mv openexr-3.1.7 openexr
-            rm v3.1.7.tar.gz
+            tar -xvzf v3.1.8.tar.gz -C ${{github.workspace}}/
+            mv openexr-3.1.8 openexr
+            rm v3.1.8.tar.gz
 
       - name: Build wheels
         run: python -m cibuildwheel --output-dir wheelhouse

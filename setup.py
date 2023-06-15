@@ -4,7 +4,7 @@ from os import system
 
 VERSION_MAJOR = 1
 VERSION_MINOR = 3
-VERSION_PATCH = 9
+VERSION_PATCH = 10
 VERSION = f"{VERSION_MAJOR}.{VERSION_MINOR}.{VERSION_PATCH}"
 DESC = """Python bindings for ILM's OpenEXR image file format.
 
