@@ -55,6 +55,15 @@ if platform.system() == "Darwin":
         "/opt/homebrew/opt/imath/include/Imath",
     ]
     library_dirs += ["/opt/homebrew/opt/openexr/lib", "/opt/homebrew/opt/imath/lib"]
+if platform.system() == "Windows":
+    include_dirs += [
+        "C:/Program Files (x86)/OpenEXR/include/Imath",
+        "C:/Program Files (x86)/OpenEXR/include/OpenEXR",
+    ]
+    library_dirs += [
+        "C:/Program Files (x86)/OpenEXR/lib",
+        "C:/Program Files/zlib/lib"
+    ]
 
 setup(
     name="OpenEXR",
