@@ -12,7 +12,7 @@ jobs:
       release_id: ${{ steps.create_release.outputs.id }}
       upload_url: ${{ steps.create_release.outputs.upload_url }}
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       if: github.event_name == 'push'
 
     - uses: dev-drprasad/delete-tag-and-release@v1.0.1
@@ -114,7 +114,7 @@ jobs:
         cd ..
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # Used to host cibuildwheel
       - uses: actions/setup-python@v4
