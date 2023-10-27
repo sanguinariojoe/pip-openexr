@@ -1,5 +1,10 @@
 #include <Python.h>
 
+#ifdef _WIN32
+// On Windows, SSIZE_T is defined, ssize_t is only in posix standard.
+typedef SSIZE_T ssize_t
+#endif
+
 #if PY_VERSION_HEX < 0x02050000 && !defined(PY_SSIZE_T_MIN)
 typedef int Py_ssize_t;
 #define PY_SSIZE_T_MAX INT_MAX
