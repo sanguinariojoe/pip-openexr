@@ -1,3 +1,7 @@
+# This repository is not longer maintained
+
+The Python wrapper has been integrated on the OpenEXR package (see https://github.com/AcademySoftwareFoundation/openexr/pull/1487 and https://github.com/AcademySoftwareFoundation/openexr/pull/1581)
+
 # pip-openexr
 
 The pip package for OpenEXR Python bindings:
