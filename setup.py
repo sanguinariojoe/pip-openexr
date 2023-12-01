@@ -64,6 +64,13 @@ if platform.system() == "Windows":
         "C:/Program Files (x86)/OpenEXR/lib",
         "C:/Program Files/zlib/lib"
     ]
+if "CONDA_PREFIX" in os.environ:  # override or append conda prefix
+    libraries = ["Iex", "OpenEXR", "z"]  # assume recent enough version
+    include_dirs += [
+        os.environ["CONDA_PREFIX"] + "/include/OpenEXR",
+        os.environ["CONDA_PREFIX"] + "/include/Imath"
+    ]
+    library_dirs += [os.environ["CONDA_PREFIX"] + "/lib"]
 
 setup(
     name="OpenEXR",
